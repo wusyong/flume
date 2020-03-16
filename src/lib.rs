@@ -127,7 +127,7 @@ impl<T> Shared<T> {
             // Attempt to gain exclusive access to the queue
             let guard = if let Some(mut queue) = self.queue.try_lock() {
                 let listen_mode = self.listen_mode.load(Ordering::Relaxed);
-                // If list_mode is 0, it means that the receiver has been dropped
+                // If listen_mode is 0, it means that the receiver has been dropped
                 if listen_mode == 0 {
                     break Err(SendError(msg));
                 } else {
